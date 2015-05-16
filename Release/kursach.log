@@ -1,0 +1,27 @@
+﻿Сборка начата 16.05.2015 23:02:16.
+     1>Проект "C:\Users\Freeman\Documents\Visual Studio 2013\Projects\kursach\kursach\kursach.vcxproj" в узле 2 (целевые объекты Build).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt kursach.cpp
+         kursach.cpp
+     1>kursach.cpp(30): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Freeman\Documents\Visual Studio 2013\Projects\kursach\kursach\Release\kursach.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Freeman\Documents\Visual Studio 2013\Projects\kursach\kursach\Release\kursach.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Freeman\Documents\Visual Studio 2013\Projects\kursach\kursach\Release\kursach.lib" /MACHINE:X86 /SAFESEH Release\dibutil.obj
+         Release\drawing.obj
+         Release\file.obj
+         Release\image.obj
+         Release\misc.obj
+         Release\mouse.obj
+         Release\palette.obj
+         Release\text.obj
+         Release\winbgi.obj
+         Release\winthread.obj
+         Release\kursach.obj
+         Release\stdafx.obj
+         Создание кода
+         Создание кода завершено
+         kursach.vcxproj -> C:\Users\Freeman\Documents\Visual Studio 2013\Projects\kursach\kursach\Release\kursach.exe
+     1>Сборка проекта "C:\Users\Freeman\Documents\Visual Studio 2013\Projects\kursach\kursach\kursach.vcxproj" завершена (целевые объекты Build).
+
+Сборка успешно завершена.
+
+Затраченное время: 00:00:02.21

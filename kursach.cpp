@@ -16,6 +16,7 @@ struct pt{
 		this->x = x;
 		this->y = y;
 	};
+	pt(){};
 };
 
 void swap(int *a, int *b){
@@ -38,27 +39,30 @@ void shuffle(){
 }
 
 void loadIMG(){
-	img[0] = loadBMP("C:\\Users\\Sony\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\0.jpg");
-	img[1] = loadBMP("C:\\Users\\Sony\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\1.jpg");
-	img[2] = loadBMP("C:\\Users\\Sony\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\2.jpg");
-	img[3] = loadBMP("C:\\Users\\Sony\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\3.jpg");
-	img[4] = loadBMP("C:\\Users\\Sony\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\4.jpg");
-	img[5] = loadBMP("C:\\Users\\Sony\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\5.jpg");
-	img[6] = loadBMP("C:\\Users\\Sony\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\6.jpg");
-	img[7] = loadBMP("C:\\Users\\Sony\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\7.jpg");
-	img[8] = loadBMP("C:\\Users\\Sony\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\8.jpg");
-	img[9] = loadBMP("C:\\Users\\Sony\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\9.jpg");
+	img[0] = loadBMP("C:\\Users\\Freeman\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\0.jpg");
+	img[1] = loadBMP("C:\\Users\\Freeman\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\1.jpg");
+	img[2] = loadBMP("C:\\Users\\Freeman\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\2.jpg");
+	img[3] = loadBMP("C:\\Users\\Freeman\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\3.jpg");
+	img[4] = loadBMP("C:\\Users\\Freeman\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\4.jpg");
+	img[5] = loadBMP("C:\\Users\\Freeman\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\5.jpg");
+	img[6] = loadBMP("C:\\Users\\Freeman\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\6.jpg");
+	img[7] = loadBMP("C:\\Users\\Freeman\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\7.jpg");
+	img[8] = loadBMP("C:\\Users\\Freeman\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\8.jpg");
+	img[9] = loadBMP("C:\\Users\\Freeman\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\9.jpg");
 }
 
 pt getc(){
 	int x, y;
-	if (ismouseclick(WM_LBUTTONUP)){
-		//x = 
+	for (int i = 72; i < 506; i += 148)
+	for (int j = 83; j < 900; j += 161){
+		x = mousex(), y = mousey();
+		if (y >= i && y <= i + 127 && x >= j && x <= j + 100)
+			return pt((j-83)/161 + 1, (i - 72)/148 + 1);
 	}
-	return pt(0, 0);
+	return pt(-1, -1);
 }
 
-void putIMG(){
+void putRub(){
 	for (int i = 72; i < 506; i+= 148)
 	for (int j = 83; j < 900; j += 161)
 		putimage(j, i, img[0], 0);
@@ -72,9 +76,48 @@ void showIMG(int n, int x, int y){
 int main(){
 	shuffle();
 	initwindow(1056, 595, "Найди пару");
-	putimage(0, 0, loadBMP("C:\\Users\\Sony\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\back.jpg"), 0);
+	putimage(0, 0, loadBMP("C:\\Users\\Freeman\\Documents\\Visual Studio 2013\\Projects\\kursach\\kursach\\img\\back.jpg"), 0);
 	loadIMG();
-	putIMG();
+	putRub();
+	int st = 0, lst = 0;
+	pt lpos;
+	while (1){
+		switch (st)
+		{
+		case 0:
+			if (ismouseclick(WM_LBUTTONUP)){
+				pt tm = getc();
+				if (tm.x != -1 && tm.y != -1){
+					showIMG(curr[(6 * (tm.y - 1)) + tm.x - 1], tm.x, tm.y);
+					lst = curr[(6 * (tm.y - 1)) + tm.x - 1];
+					lpos = tm;
+								st = 1;
+				}
+				clearmouseclick(WM_LBUTTONUP);
+				clearmouseclick(WM_LBUTTONDOWN);
+			}
+			break;
+		case 1:
+			if (ismouseclick(WM_LBUTTONUP)){
+				pt tm = getc();
+				if (tm.x != -1 && tm.y != -1){
+					showIMG(curr[(6 * (tm.y - 1)) + tm.x - 1], tm.x, tm.y);
+					if (curr[(6 * (tm.y - 1)) + tm.x - 1] != lst){
+						Sleep(2000);
+						showIMG(0, tm.x, tm.y);
+						showIMG(0, lpos.x, lpos.y);
+						st = 0;
+					}
+					else st = 0;
+				}
+				clearmouseclick(WM_LBUTTONUP);
+				clearmouseclick(WM_LBUTTONDOWN);
+			}
+			break;
+		default:
+			break;
+		}
+	}
 	getch();
 	return 0;
 }
